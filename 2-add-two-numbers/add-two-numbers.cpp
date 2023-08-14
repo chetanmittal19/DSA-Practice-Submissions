@@ -18,7 +18,7 @@ public:
         ListNode *head = new ListNode(0);
         ListNode *tail = head;
         int carry=0;
-        while(curr1!=NULL || curr2!=NULL){
+        while(curr1!=NULL || curr2!=NULL || carry>0){
             int val = carry;
             if(curr1!=NULL) {
                 val+= curr1->val;
@@ -32,7 +32,7 @@ public:
             tail = tail->next;
             carry = (val>9) ? 1 : 0;
         }
-        if(carry==1) tail->next = new ListNode(1);
+        // if(carry==1) tail->next = new ListNode(1);
         return head->next;
     }
 };
