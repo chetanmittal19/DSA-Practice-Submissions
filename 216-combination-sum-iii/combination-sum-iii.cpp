@@ -15,6 +15,7 @@ public:
         }
 
         for(int i=ind; i<=9; i++){
+            if(i>n) break;
             v.push_back(i);
             recursive(k-1, n, ans, v, i+1, sum+i);
             v.pop_back();
