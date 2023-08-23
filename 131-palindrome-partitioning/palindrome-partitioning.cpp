@@ -12,7 +12,7 @@ public:
             ans.push_back(v);
             return;
         }
-        
+
         for(int i=ind; i<=s.size(); i++){
             if(isPalindrome(s, ind, i)){
                 v.push_back(s.substr(ind, i-ind+1));
@@ -22,7 +22,7 @@ public:
         }
     }
 
-    bool isPalindrome(string s, int st, int en){
+    bool isPalindrome(string &s, int st, int en){
         while(st<en){
             if(s[st]!=s[en]) return false;
             st++;
