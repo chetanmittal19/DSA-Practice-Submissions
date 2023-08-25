@@ -3,8 +3,8 @@ public:
     vector<string> addOperators(string num, int target) {
         vector<string> ans;
         if(num.length()==0) return ans;
-        // recursive(num, target, ans, "", 0, 0, 0);
-        backtrack(num, target, ans, 0, "", 0, 0);
+        recursive(num, target, ans, "", 0, 0, 0);
+        // backtrack(num, target, ans, 0, "", 0, 0);
         return ans;
     }
 
@@ -20,7 +20,7 @@ public:
             numStr += s[j];
             num = num * 10 + s[j] - '0';
             if (i == 0) {
-                backtrack(s, target, ans, j + 1, path + numStr, num, num); // First num, pick it without adding any operator!
+                backtrack(s, target, ans, j + 1, path + numStr, num, num);
             } else {
                 backtrack(s, target, ans, j + 1, path + "+" + numStr, resSoFar + num, num);
                 backtrack(s, target, ans, j + 1, path + "-" + numStr, resSoFar - num, -num);
@@ -29,15 +29,14 @@ public:
         }
     }
 
-    void recursive(string &num, int target, vector<string> &ans, string s, long long val, long long prevVal, int ind){
-        if(val>target) return;
+    void recursive(string &num, int target, vector<string> &ans, string s, long val, long prevVal, int ind){
         if(ind==num.length()){
             if(val==target) ans.push_back(s);
             return;
         }
 
         string temp ="";
-        long long n = 0;
+        long n = 0;
         for(int i=ind; i<num.length(); i++){
             if (i > ind && num[ind] == '0') break;
             temp+=num[i];
@@ -48,7 +47,6 @@ public:
                 recursive(num, target, ans, s+"-"+temp, val - n, -n, i+1);
                 recursive(num, target, ans, s+"*"+temp, val-prevVal + prevVal*n, prevVal*n, i+1);
             }
-            // if(num[ind]=='0') break;
         }
     }
 };
