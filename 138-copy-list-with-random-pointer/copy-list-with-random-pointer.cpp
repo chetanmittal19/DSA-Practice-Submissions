@@ -35,7 +35,7 @@ public:
         // }
         // return cloneHead;
 
-        //Method 2 
+        //Method 2 O(3N)=O(N), O(1)
         if(head==NULL) return head;
         Node *curr = head;
         while(curr!=NULL){
@@ -62,6 +62,5 @@ public:
         }
         curr->next = NULL;
         return clonedHead;
-
     }
 };
