@@ -1,6 +1,7 @@
 class Solution {
 public:
     int divide(int dividend, int divisor) {
+        // Method 1 [ThinkCode-> 7min] O(logn)
         if(dividend == INT_MIN && divisor == -1) return INT_MAX;
         if(dividend == INT_MIN && divisor == 1) return INT_MIN;
 
