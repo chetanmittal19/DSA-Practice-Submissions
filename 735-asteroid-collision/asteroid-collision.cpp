@@ -3,22 +3,14 @@ public:
     vector<int> asteroidCollision(vector<int>& asteroids) {
         int n = asteroids.size();
         stack<int> st;
-        for(int i=0; i<n; i++){
-            if(st.empty() || st.top()<0 || asteroids[i]>0) st.push(asteroids[i]);
+        for(auto val: asteroids) {
+            if(val > 0) st.push(val);
             else {
-                int ele = asteroids[i];
-                bool flag = false;
-                while(!st.empty() && st.top()>0 && ele<0){
-                    if(st.top()==abs(ele)){
-                        st.pop();
-                        flag = true;
-                        break;
-                    } else {
-                        if(abs(ele)<st.top()) ele = st.top();
-                        st.pop();
-                    }
-                }
-                if(!flag) st.push(ele);
+                // popping values which are less than val in the stack
+                while(!st.empty() && st.top()>0 && st.top() < -val) st.pop();
+                if(!st.empty() && st.top() == -val) st.pop(); // if val and top value is equal
+                else if(!st.empty() && st.top() > -val){} // if stack top is greater than val
+                else st.push(val);
             }
         }
         
