@@ -6,7 +6,9 @@ class Solution {
         // we can calculate smallest in a window while creating a window
 
         // Method 3 [Stack, Fraz] O(3N), O(2N)
-        // for eg2: prevSmall = [-1, 0, 1, 0, -1], nextSmall = [4, 3, 3, 4, 5]
+        // for example2: prevSmall = [-1, 0, 1, 0, -1], nextSmall = [4, 3, 3, 4, 5]
+        // fraz did not tell how to handle duplicates
+        // duplicate eg = [71, 55, 82, 55] pS = [-1, -1, 1, -1], ns = [1, 4, 3, 4] output = 593
         int n = arr.length;
         Stack<Integer> st1 = new Stack<>();
         Stack<Integer> st2 = new Stack<>();
@@ -14,14 +16,14 @@ class Solution {
         int[] nextSmall = new int[n];
 
         for(int i=0; i<n; i++) {
-            while(!st1.isEmpty() && arr[st1.peek()]>=arr[i]) st1.pop();
+            while(!st1.isEmpty() && arr[st1.peek()]>arr[i]) st1.pop(); // for handling duplicates we did 
             if(st1.isEmpty()) prevSmall[i] = -1;
             else prevSmall[i] = st1.peek();
             st1.push(i);
         }
 
         for(int i=n-1; i>=0; i--) {
-            while(!st2.isEmpty() && arr[st2.peek()]>arr[i]) st2.pop();
+            while(!st2.isEmpty() && arr[st2.peek()]>=arr[i]) st2.pop();
             if(st2.isEmpty()) nextSmall[i] = n;
             else nextSmall[i] = st2.peek();
             st2.push(i);
@@ -30,7 +32,6 @@ class Solution {
         long ans = 0;
         for(int i=0; i<n; i++){
             ans = (ans + (long)((long)arr[i] * (i - prevSmall[i]) * (nextSmall[i] - i)))%1000000007;
-            // ans%= 1000000007;
         }
         return (int)ans;
     }
