@@ -16,11 +16,11 @@ public:
 
         // Method 2
         int n = nums.size();
-        for(int i=0; i<n; i++) nums[i] = nums[i]%2;
+        // for(int i=0; i<n; i++) nums[i] = nums[i]%2;
         unordered_map<int, int> map;
         int ans = 0, sum = 0;
         for(int r=0; r<n; r++){
-            sum+=nums[r];
+            sum+=nums[r]%2;
             if(sum==k) ans++;
             ans+= map[sum-k];
             map[sum]++;
