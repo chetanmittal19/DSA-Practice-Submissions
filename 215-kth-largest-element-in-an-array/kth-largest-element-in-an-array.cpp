@@ -1,14 +1,16 @@
 class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) {
-        if(nums.size()==1) return nums[0];
-        priority_queue<int> p;
-        for(int i: nums) p.push(i);
+        // Method 1 [Sorting] O(nlogn), O(n)
 
-        for(int i=1; i<=k; i++){
-            if(i==k) return p.top();
-            p.pop();
-        }
-        return -1;
+        // Method 2 [Binary Search] O(n * log(max-min)), O(1)
+        // We first calculate the lowest and highest element in the array to get the range
+        // After that we apply binary search in that range and check if how many elements are less than middle elements... and move the lower and higher accordingly.
+
+        // Method 3 [Heap / Priority Queue] O(nlogk), O(k)
+        priority_queue<int> p; // max priority queue
+        for(int i: nums) p.push(i);
+        for(int i=0; i<k-1; i++) p.pop();
+        return p.top();
     }
 };
