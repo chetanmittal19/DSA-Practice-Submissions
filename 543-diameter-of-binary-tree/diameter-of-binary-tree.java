@@ -28,14 +28,14 @@ class Solution {
 
         // Method 3 [Optimised] O(n), O(n)
         calculateDiameter(root);
-        return res-1;
+        return res;
     }
 
     private int calculateDiameter(TreeNode root) {
         if(root==null) return 0;
         int l = calculateDiameter(root.left);
         int r = calculateDiameter(root.right);
-        res = Math.max(res, 1 + l + r);
+        res = Math.max(res, l + r);
         return 1 + Math.max(l, r);
     }
 
