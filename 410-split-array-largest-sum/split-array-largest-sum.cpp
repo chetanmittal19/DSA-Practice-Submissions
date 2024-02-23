@@ -18,11 +18,10 @@ public:
         int l = *max_element(nums.begin(), nums.end());
         int h = accumulate(nums.begin(), nums.end(), 0);
         int ans = l;
-        while(l<=h){
+        while(l<=h) {
             int mid = l+(h-l)/2;
-            if(calculateSubarrays(nums, mid)>k){
-                l=mid+1;
-            } else {
+            if(calculateSubarrays(nums, mid)>k) l=mid+1;
+            else {
                 ans = mid;
                 h = mid-1;
             }
@@ -33,10 +32,10 @@ public:
     int calculateSubarrays(vector<int> &nums, int maxSum){
         int count=1;
         long long sum=0;
-        for(auto i: nums){
-            if(i>maxSum) return false;
+        for(auto i: nums) {
+            // if(i>maxSum) return false;
             sum+=i;
-            if(sum>maxSum){
+            if(sum>maxSum) {
                 count++;
                 sum=i;
             }
