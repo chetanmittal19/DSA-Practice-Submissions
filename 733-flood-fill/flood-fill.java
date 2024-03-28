@@ -27,19 +27,21 @@ class Solution {
 
         Queue<Pair> q = new LinkedList<>();
         q.add(new Pair(sr, sc));
+        ans[sr][sc] = newColor;
         vis[sr][sc] = true;
         int[] delRow = {-1, 0, 1, 0};
         int[] delCol = {0, 1, 0, -1};
 
         while(!q.isEmpty()) {
             Pair p = q.poll();
-            ans[p.sr][p.sc] = newColor;
+            // ans[p.sr][p.sc] = newColor;
             for(int i=0; i<4; i++) {
                 int nRow = p.sr + delRow[i];
                 int nCol = p.sc + delCol[i];
                 if(nRow>=0 && nRow<n && nCol>=0 && nCol<m && !vis[nRow][nCol] && image[nRow][nCol]==iniColor) {
                     q.add(new Pair(nRow, nCol));
                     vis[nRow][nCol] = true;
+                    ans[nRow][nCol] = newColor;
                 }
             }
         }
@@ -53,7 +55,7 @@ class Solution {
         for(int i=0; i<4; i++) {
             int nRow = sr + delRow[i];
             int nCol = sc + delCol[i];
-            if(nRow>=0 && nRow<n && nCol>=0 && nCol<m && image[nRow][nCol]==iniColor) {
+            if(nRow>=0 && nRow<n && nCol>=0 && nCol<m && image[nRow][nCol]==iniColor && ans[nRow][nCol]!=newColor) {
                 dfs(nRow, nCol, ans, image, newColor, delRow, delCol, iniColor);
             }
         }
